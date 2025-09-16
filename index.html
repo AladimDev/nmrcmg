@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quer sair comigo?</title>
   <style>
-    /* Reset básico */
     * {
       box-sizing: border-box;
     }
@@ -13,7 +12,7 @@
     body {
       margin: 0;
       height: 100vh;
-      background: #FDE7F0; /* rosa clarinho */
+      background: #FDE7F0;
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
@@ -88,10 +87,10 @@
       box-shadow: 0 5px 10px rgba(153, 153, 153, 0.6);
       min-width: 100px;
       position: absolute;
-      top: 110px; /* posição inicial */
+      top: 110px;
       right: 40px;
       transition: left 0.3s ease, top 0.3s ease, background-color 0.3s ease;
-      touch-action: manipulation; /* melhora resposta ao toque */
+      touch-action: manipulation;
     }
     #noBtn:hover {
       background-color: #777;
@@ -99,7 +98,7 @@
 
     #buttonsWrapper {
       position: relative;
-      height: 160px; /* espaço para o botão "Não" se mover */
+      height: 160px;
       margin-top: 10px;
     }
 
@@ -111,7 +110,15 @@
       color: #ff4da6;
     }
 
-    /* Responsividade */
+    #message img {
+      margin-top: 15px;
+      max-width: 150px;
+      height: auto;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
     @media (max-width: 400px) {
       .container {
         padding: 20px 25px;
@@ -137,14 +144,17 @@
     <button id="startBtn">Clique aqui</button>
 
     <div id="questionBox">
-      <h1>Quer sair comigo?</h1>
+      <h1>me da uma chance 🥺?</h1>
       <div id="buttonsWrapper">
         <button id="yesBtn">Sim</button>
         <button id="noBtn">Não</button>
       </div>
     </div>
 
-    <div id="message">Fechou, está marcado 03/10 as 19:00 passo na sua casa para comermos no Outback. 💖</div>
+    <div id="message">
+      eu sabia, quem nao daria uma chance pra um garanhao desses 💖
+      <img src="download.jpg" alt="Emoji galanteador">
+    </div>
   </div>
 
   <script>
@@ -155,44 +165,35 @@
     const message = document.getElementById('message');
     const buttonsWrapper = document.getElementById('buttonsWrapper');
 
-    // Mostrar pergunta ao clicar no botão inicial
     startBtn.addEventListener('click', () => {
       startBtn.style.display = 'none';
       questionBox.style.display = 'block';
       message.style.display = 'none';
-
-      // Reset posição do botão "Não"
       noBtn.style.left = '';
       noBtn.style.top = '';
       noBtn.style.right = '40px';
       noBtn.style.position = 'absolute';
     });
 
-    // Mostrar mensagem fofa ao clicar em "Sim"
     yesBtn.addEventListener('click', () => {
       questionBox.style.display = 'none';
       message.style.display = 'block';
     });
 
-    // Função para mover o botão "Não" para uma posição aleatória dentro do wrapper
     function moveNoButton() {
       const wrapperRect = buttonsWrapper.getBoundingClientRect();
       const btnWidth = noBtn.offsetWidth;
       const btnHeight = noBtn.offsetHeight;
-
       const maxX = wrapperRect.width - btnWidth;
       const maxY = wrapperRect.height - btnHeight;
-
       const randomX = Math.floor(Math.random() * maxX);
       const randomY = Math.floor(Math.random() * maxY);
-
       noBtn.style.position = 'absolute';
       noBtn.style.left = `${randomX}px`;
       noBtn.style.top = `${randomY}px`;
       noBtn.style.right = 'auto';
     }
 
-    // Eventos para desktop e mobile
     noBtn.addEventListener('mouseenter', moveNoButton);
     noBtn.addEventListener('click', (e) => {
       e.preventDefault();

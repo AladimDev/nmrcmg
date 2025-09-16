@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Quer namorar comigo?</title>
+  <style>
+    /* Reset básico */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #FDE7F0; /* rosa clarinho */
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .container {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      max-width: 360px;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      user-select: none;
+    }
+
+    h1 {
+      margin-bottom: 25px;
+      font-weight: 700;
+      color: #333;
+      font-size: 1.8rem;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      border-radius: 25px;
+      padding: 14px 36px;
+      font-size: 18px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, transform 0.15s ease;
+      user-select: none;
+      position: relative;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    #startBtn {
+      background-color: #ff9ecd;
+      color: white;
+      box-shadow: 0 6px 12px rgba(255, 156, 172, 0.6);
+      width: 100%;
+      max-width: 300px;
+    }
+    #startBtn:hover {
+      background-color: #ff7bbf;
+    }
+
+    #questionBox {
+      display: none;
+    }
+
+    #yesBtn {
+      background-color: #ff7bbf;
+      color: white;
+      box-shadow: 0 5px 10px rgba(255, 123, 191, 0.6);
+      margin-right: 20px;
+      min-width: 100px;
+    }
+    #yesBtn:hover {
+      background-color: #ff5a9e;
+    }
+
+    #noBtn {
+      background-color: #999;
+      color: white;
+      box-shadow: 0 5px 10px rgba(153, 153, 153, 0.6);
+      min-width: 100px;
+      position: absolute;
+      top: 110px; /* posição inicial */
+      right: 40px;
+      transition: left 0.3s ease, top 0.3s ease, background-color 0.3s ease;
+      touch-action: manipulation; /* melhora resposta ao toque */
+    }
+    #noBtn:hover {
+      background-color: #777;
+    }
+
+    #buttonsWrapper {
+      position: relative;
+      height: 160px; /* espaço para o botão "Não" se mover */
+      margin-top: 10px;
+    }
+
+    #message {
+      display: none;
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ff4da6;
+    }
+
+    /* Responsividade */
+    @media (max-width: 400px) {
+      .container {
+        padding: 20px 25px;
+      }
+      button {
+        font-size: 16px;
+        padding: 12px 28px;
+      }
+      #noBtn {
+        top: 100px;
+        right: 20px;
+        min-width: 90px;
+      }
+      #yesBtn {
+        min-width: 90px;
+        margin-right: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <button id="startBtn">Clique aqui</button>
+
+    <div id="questionBox">
+      <h1>Quer namorar comigo?</h1>
+      <div id="buttonsWrapper">
+        <button id="yesBtn">Sim</button>
+        <button id="noBtn">Não</button>
+      </div>
+    </div>
+
+    <div id="message">Eu sabia 💖</div>
+  </div>
+
+  <script>
+    const startBtn = document.getElementById('startBtn');
+    const questionBox = document.getElementById('questionBox');
+    const yesBtn = document.getElementById('yesBtn');
+    const noBtn = document.getElementById('noBtn');
+    const message = document.getElementById('message');
+    const buttonsWrapper = document.getElementById('buttonsWrapper');
+
+    // Mostrar pergunta ao clicar no botão inicial
+    startBtn.addEventListener('click', () => {
+      startBtn.style.display = 'none';
+      questionBox.style.display = 'block';
+      message.style.display = 'none';
+
+      // Reset posição do botão "Não"
+      noBtn.style.left = '';
+      noBtn.style.top = '';
+      noBtn.style.right = '40px';
+      noBtn.style.position = 'absolute';
+    });
+
+    // Mostrar mensagem fofa ao clicar em "Sim"
+    yesBtn.addEventListener('click', () => {
+      questionBox.style.display = 'none';
+      message.style.display = 'block';
+    });
+
+    // Função para mover o botão "Não" para uma posição aleatória dentro do wrapper
+    function moveNoButton() {
+      const wrapperRect = buttonsWrapper.getBoundingClientRect();
+      const btnWidth = noBtn.offsetWidth;
+      const btnHeight = noBtn.offsetHeight;
+
+      const maxX = wrapperRect.width - btnWidth;
+      const maxY = wrapperRect.height - btnHeight;
+
+      const randomX = Math.floor(Math.random() * maxX);
+      const randomY = Math.floor(Math.random() * maxY);
+
+      noBtn.style.position = 'absolute';
+      noBtn.style.left = `${randomX}px`;
+      noBtn.style.top = `${randomY}px`;
+      noBtn.style.right = 'auto';
+    }
+
+    // Eventos para desktop e mobile
+    noBtn.addEventListener('mouseenter', moveNoButton);
+    noBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    });
+    noBtn.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      moveNoButton();
+    }, { passive: false });
+  </script>
+</body>
+</html>

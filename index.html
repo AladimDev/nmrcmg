@@ -1,208 +1,222 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title> abre sa porra?</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>com muito amor ❤️</title>
   <style>
     * {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
     }
 
     body {
-      margin: 0;
-      height: 100vh;
-      background: #FDE7F0;
-      font-family: Arial, sans-serif;
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #ffe8e8 0%, #ffd6d6 100%);
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       padding: 20px;
+      overflow: hidden;
     }
 
     .container {
-      background: white;
-      padding: 30px 40px;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      max-width: 360px;
-      width: 100%;
       text-align: center;
       position: relative;
-      user-select: none;
+      z-index: 10;
     }
 
-    h1 {
-      margin-bottom: 25px;
-      font-weight: 700;
-      color: #333;
-      font-size: 1.8rem;
+    .instruction {
+      font-size: 1.5rem;
+      color: #d81b60;
+      margin-bottom: 30px; /* aumentei o espaçamento */
+      font-weight: 500;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: pulse 2s infinite;
     }
 
-    button {
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+
+    .heart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 30px 0 15px 0; /* aumentei o espaçamento acima e abaixo */
+    }
+
+    .heart {
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #ff6b6b, #ff5252);
+      position: relative;
       cursor: pointer;
-      border: none;
-      border-radius: 25px;
-      padding: 14px 36px;
-      font-size: 18px;
-      font-weight: 600;
-      transition: background-color 0.3s ease, transform 0.15s ease;
-      user-select: none;
-      position: relative;
+      box-shadow: 0 4px 20px rgba(216, 27, 96, 0.3);
+      transform-origin: center;
+      transition: transform 0.2s ease;
     }
 
-    button:active {
-      transform: scale(0.95);
-    }
-
-    #startBtn {
-      background-color: #ff9ecd;
-      color: white;
-      box-shadow: 0 6px 12px rgba(255, 156, 172, 0.6);
-      width: 100%;
-      max-width: 300px;
-    }
-    #startBtn:hover {
-      background-color: #ff7bbf;
-    }
-
-    #questionBox {
-      display: none;
-    }
-
-    #yesBtn {
-      background-color: #ff7bbf;
-      color: white;
-      box-shadow: 0 5px 10px rgba(255, 123, 191, 0.6);
-      margin-right: 20px;
-      min-width: 100px;
-    }
-    #yesBtn:hover {
-      background-color: #ff5a9e;
-    }
-
-    #noBtn {
-      background-color: #999;
-      color: white;
-      box-shadow: 0 5px 10px rgba(153, 153, 153, 0.6);
-      min-width: 100px;
+    .heart::before,
+    .heart::after {
+      content: '';
+      width: 70px;
+      height: 70px;
+      background: linear-gradient(45deg, #ff6b6b, #ff5252);
+      border-radius: 50%;
       position: absolute;
-      top: 110px;
-      right: 40px;
-      transition: left 0.3s ease, top 0.3s ease, background-color 0.3s ease;
-      touch-action: manipulation;
-    }
-    #noBtn:hover {
-      background-color: #777;
     }
 
-    #buttonsWrapper {
-      position: relative;
-      height: 160px;
-      margin-top: 10px;
+    .heart::before {
+      top: -35px;
+      left: 0;
     }
 
-    #message {
-      display: none;
-      margin-top: 30px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #ff4da6;
+    .heart::after {
+      top: 0;
+      left: 35px;
     }
 
-    #message img {
-      margin-top: 15px;
-      max-width: 150px;
-      height: auto;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+    .heart:active {
+      transform: scale(1.15);
     }
 
-    @media (max-width: 400px) {
-      .container {
-        padding: 20px 25px;
-      }
-      button {
-        font-size: 16px;
-        padding: 12px 28px;
-      }
-      #noBtn {
-        top: 100px;
-        right: 20px;
-        min-width: 90px;
-      }
-      #yesBtn {
-        min-width: 90px;
-        margin-right: 15px;
+    .heart.exploding {
+      animation: explode 1s ease-out forwards;
+    }
+
+    @keyframes explode {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.5); opacity: 0.8; }
+      100% { transform: scale(2); opacity: 0; visibility: hidden; }
+    }
+
+    .counter {
+      font-size: 1.2rem;
+      color: #b71c1c;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+
+    .kitten-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      opacity: 0;
+      transition: all 1s ease-in-out;
+      z-index: 20;
+      text-align: center;
+    }
+
+    .kitten-container.show {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .kitten-image {
+      width: 250px;
+      height: 250px;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      object-fit: cover;
+      /* removi a borda branca */
+    }
+
+    .hearts-fall {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    .falling-heart {
+      position: absolute;
+      font-size: 20px;
+      color: #ff6b6b;
+      animation: fall linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <button id="startBtn">Clique aqui</button>
-
-    <div id="questionBox">
-      <h1>me da uma chance 🥺?</h1>
-      <div id="buttonsWrapper">
-        <button id="yesBtn">Sim</button>
-        <button id="noBtn">Não</button>
-      </div>
+  <div class="hearts-fall" id="heartsFall"></div>
+  
+  <div class="container" id="mainContainer">
+    <div class="instruction">Clique aqui no coração ❤️</div>
+    
+    <div class="heart-container">
+      <div class="heart" id="heart"></div>
     </div>
+    <div class="counter" id="counter">Faltam 15 cliques</div>
+  </div>
 
-    <div id="message">
-      eu sabia, quem nao daria uma chance pra um garanhao desses 💖
-      <img src="download.jpg" alt="Emoji galanteador">
-    </div>
+  <div class="kitten-container" id="kittenContainer">
+    <img src="images.jpeg" 
+         alt="Gatinho fofo" 
+         class="kitten-image">
   </div>
 
   <script>
-    const startBtn = document.getElementById('startBtn');
-    const questionBox = document.getElementById('questionBox');
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
-    const message = document.getElementById('message');
-    const buttonsWrapper = document.getElementById('buttonsWrapper');
+    document.addEventListener('DOMContentLoaded', function() {
+      const heart = document.getElementById('heart');
+      const kittenContainer = document.getElementById('kittenContainer');
+      const heartsFall = document.getElementById('heartsFall');
+      const counter = document.getElementById('counter');
+      const mainContainer = document.getElementById('mainContainer');
+      
+      let clickCount = 0;
+      const clicksToExplode = 15;
 
-    startBtn.addEventListener('click', () => {
-      startBtn.style.display = 'none';
-      questionBox.style.display = 'block';
-      message.style.display = 'none';
-      noBtn.style.left = '';
-      noBtn.style.top = '';
-      noBtn.style.right = '40px';
-      noBtn.style.position = 'absolute';
+      heart.addEventListener('click', function() {
+        clickCount++;
+        createFallingHearts();
+
+        const remaining = clicksToExplode - clickCount;
+        if (remaining > 0) {
+          counter.textContent = `Faltam ${remaining} cliques`;
+        } else {
+          counter.textContent = "💥 Boom!";
+        }
+
+        if (clickCount >= clicksToExplode) {
+          heart.classList.add('exploding');
+          setTimeout(() => {
+            mainContainer.style.display = "none";
+            kittenContainer.classList.add('show');
+            setInterval(createFallingHearts, 300);
+          }, 1000);
+        }
+      });
+      
+      function createFallingHearts() {
+        for (let i = 0; i < 5; i++) {
+          const falling = document.createElement('div');
+          falling.classList.add('falling-heart');
+          falling.innerHTML = '❤️';
+          falling.style.left = Math.random() * 100 + 'vw';
+          falling.style.animationDuration = (Math.random() * 3 + 2) + 's';
+          falling.style.fontSize = (Math.random() * 20 + 15) + 'px';
+          heartsFall.appendChild(falling);
+          setTimeout(() => falling.remove(), 5000);
+        }
+      }
+
+      setInterval(createFallingHearts, 1200);
     });
-
-    yesBtn.addEventListener('click', () => {
-      questionBox.style.display = 'none';
-      message.style.display = 'block';
-    });
-
-    function moveNoButton() {
-      const wrapperRect = buttonsWrapper.getBoundingClientRect();
-      const btnWidth = noBtn.offsetWidth;
-      const btnHeight = noBtn.offsetHeight;
-      const maxX = wrapperRect.width - btnWidth;
-      const maxY = wrapperRect.height - btnHeight;
-      const randomX = Math.floor(Math.random() * maxX);
-      const randomY = Math.floor(Math.random() * maxY);
-      noBtn.style.position = 'absolute';
-      noBtn.style.left = `${randomX}px`;
-      noBtn.style.top = `${randomY}px`;
-      noBtn.style.right = 'auto';
-    }
-
-    noBtn.addEventListener('mouseenter', moveNoButton);
-    noBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      moveNoButton();
-    });
-    noBtn.addEventListener('touchstart', (e) => {
-      e.preventDefault();
-      moveNoButton();
-    }, { passive: false });
   </script>
 </body>
 </html>
